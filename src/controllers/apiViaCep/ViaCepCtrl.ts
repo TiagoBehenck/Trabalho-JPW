@@ -3,7 +3,7 @@ import {ViaCepService} from "../../services/apiViaCep/ViaCepService";
 import {ViaCepApi} from "../../interfaces/ViaCepApi";
 
 
-@Controller("/viacep")
+@Controller("/cep")
 @MergeParams(true)
 export class ViaCepCtrl {
 
@@ -13,6 +13,6 @@ export class ViaCepCtrl {
 
     @Get("/:cep")
     async getCep(@Required @PathParams("cep") cep: string): Promise<ViaCepApi> {
-        return this.viaCepService.findCep(cep);
+        return this.viaCepService.procuraCep(cep);
     }
 }

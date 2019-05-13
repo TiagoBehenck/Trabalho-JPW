@@ -4,6 +4,7 @@ import { Animal } from "../../interfaces/Animal";
 import { AnimalService } from "../../services/animal/AnimalService";
 import { writeFileSync, readFileSync } from "fs";
 import _default from "ts-log-debug";
+import { json2csv } from "json-2-csv-ts"
 
 @Controller("/animais")
 export class AnimaisCtrl {
@@ -60,13 +61,13 @@ export class AnimaisCtrl {
   async remove(@PathParams("id") @Required() id: string) {
     this.animalService.remove(id);
   }
-  /*
-  @Get("report/all")
-  @Header("content-disposition", "attachment;fileName=clientReport.csv")
-  @ContentType("text/csv")
+  
+  @Get("/report/all")
+  @Header("content-disposition", "attachment;fileName=animalReport.csv")
+  @ContentType('application/json')
   async chart() {
     let animais = await this.animalService.query();
     writeFileSync(__dirname + '/report.csv', json2csv(animais));
-    return readFileSync(__dirname + ' /report.csv', 'utf8');
-  }*/
+    return readFileSync(__dirname + '/report.csv', 'utf8');
+  }
 }
