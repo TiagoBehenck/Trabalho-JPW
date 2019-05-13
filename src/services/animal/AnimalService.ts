@@ -33,7 +33,7 @@ export class AnimalService {
       });
     });
   }
-
+ 
   async create(animal: Animal): Promise<Animal> {
     return new Promise((resolve, reject) => {
       db.insert(animal, (err) => {
