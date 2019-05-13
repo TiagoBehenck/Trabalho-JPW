@@ -61,9 +61,9 @@ export class AnimaisCtrl {
   async remove(@PathParams("id") @Required() id: string) {
     this.animalService.remove(id);
   }
-  
+
   @Get("/report/all")
-  @Header("content-disposition", "attachment;fileName=animalReport.csv")
+  @Header('content-disposition", "attachment;fileName=animalReport.csv')
   @ContentType('application/json')
   async chart() {
     let animais = await this.animalService.query();
