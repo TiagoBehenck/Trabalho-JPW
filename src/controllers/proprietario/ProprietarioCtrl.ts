@@ -1,4 +1,3 @@
-import { AnimalService } from './../../services/animal/AnimalService';
 import { BodyParams, Controller, Delete, Get, MergeParams, PathParams, Post, Put, Required, Status } from "@tsed/common";
 import { NotFound } from "ts-httpexceptions";
 import { Proprietario } from "../../interfaces/Proprietario";
@@ -30,7 +29,7 @@ export class ProprietarioCtrl {
       throw new NotFound("Proprietário não encontrado!");
     }
   }
-  @Get("/id")
+  @Get("/:id")
   async findById(@Required() @PathParams("id") id: string): Promise<Proprietario> {
     const proprietarios = await this.proprietarioService.findById(id);
 
