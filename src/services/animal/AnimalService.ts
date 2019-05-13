@@ -8,16 +8,15 @@ db.loadDatabase((err) => console.log(err || "DB animais carregado com sucesso.")
 @Service()
 export class AnimalService {
 
-
   constructor() { }
 
   async findById(id: string): Promise<Animal> {
     return new Promise((resolve, reject) => {
-      db.findOne({ _id: id }, (err, pessoa) => {
+      db.findOne({ _id: id }, (err, animal) => {
         if (err) {
           reject(err);
         } else {
-          resolve(pessoa);
+          resolve(animal);
         }
       });
     });
@@ -25,11 +24,11 @@ export class AnimalService {
 
   async query(): Promise<Animal[]> {
     return new Promise((resolve, reject) => {
-      db.find({}, (err, animais) => {
+      db.find({}, (err, ani) => {
         if (err) {
           reject(err);
         } else {
-          resolve(animais);
+          resolve(ani as Animal[]);
         }
       });
     });
@@ -59,7 +58,6 @@ export class AnimalService {
       });
     });
   }
-
 
   async remove(id: string): Promise<void> {
     return new Promise((resolve, reject) => {

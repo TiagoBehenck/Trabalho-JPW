@@ -31,6 +31,8 @@
     "concurrently": "^4.1.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
+    "json-2-csv-ts": "^1.1.2",
+    "json2csv": "^4.5.1",
     "method-override": "^3.0.0",
     "nedb": "^1.8.0",
     "node-uuid": "^1.4.8",

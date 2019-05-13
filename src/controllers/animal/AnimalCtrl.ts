@@ -1,18 +1,19 @@
-import { BodyParams, Controller, Delete, Get, PathParams, Post, Put, Required, Status } from "@tsed/common";
+import { BodyParams, Controller, Delete, Get, PathParams, Post, Put, Required, Status, Header, ContentType } from "@tsed/common";
 import { NotFound } from "ts-httpexceptions";
 import { Animal } from "../../interfaces/Animal";
 import { AnimalService } from "../../services/animal/AnimalService";
-// import {ExportToCsv } from 'export-to-csv';
+import { writeFileSync, readFileSync } from "fs";
+import _default from "ts-log-debug";
 
 @Controller("/animais")
 export class AnimaisCtrl {
 
-  constructor(private animaisService: AnimalService) { }
+  constructor(private animalService: AnimalService) { }
 
   @Post("/")
   async save(@BodyParams() animal: Animal): Promise<Animal> {
 
-    const animais = await this.animaisService.create(animal);
+    const animais = await this.animalService.create(animal);
 
     if (animais) {
       return animais;
@@ -24,7 +25,7 @@ export class AnimaisCtrl {
   @Get("/")
   async getAllAnimais(): Promise<Animal[]> {
 
-    const animais = await this.animaisService.query();
+    const animais = await this.animalService.query();
 
     if (animais) {
       return animais;
@@ -33,19 +34,9 @@ export class AnimaisCtrl {
     }
   }
 
-  @Get("/proprietario")
-  async proprietario(): Promise<Animal[]> {
-    const animais = await this.animaisService.query();
-    if (animais) {
-      return animais;
-    } else {
-      throw new NotFound("Nenhum animla encontrado!");
-    }
-  }
-
   @Get("/:id")
   async findById(@Required() @PathParams("id") id: string): Promise<Animal> {
-    const animais = await this.animaisService.findById(id);
+    const animais = await this.animalService.findById(id);
 
     if (animais) {
       return animais;
@@ -57,7 +48,7 @@ export class AnimaisCtrl {
   @Put("/:id")
   async update(@PathParams("id") @Required() id: string,
     @BodyParams() @Required() animal: Animal): Promise<Animal> {
-    const ani = await this.animaisService.update(id, animal);
+    const ani = await this.animalService.update(id, animal);
     if (ani) {
       return ani;
     } else {
@@ -67,6 +58,15 @@ export class AnimaisCtrl {
   @Delete("/:id")
   @Status(204)
   async remove(@PathParams("id") @Required() id: string) {
-    this.animaisService.remove(id);
+    this.animalService.remove(id);
   }
+  /*
+  @Get("report/all")
+  @Header("content-disposition", "attachment;fileName=clientReport.csv")
+  @ContentType("text/csv")
+  async chart() {
+    let animais = await this.animalService.query();
+    writeFileSync(__dirname + '/report.csv', json2csv(animais));
+    return readFileSync(__dirname + ' /report.csv', 'utf8');
+  }*/
 }
