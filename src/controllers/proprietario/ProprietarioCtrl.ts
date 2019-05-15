@@ -1,7 +1,9 @@
-import { BodyParams, Controller, Delete, Get, MergeParams, PathParams, Post, Put, Required, Status } from "@tsed/common";
+import { BodyParams, Controller, Delete, Get, MergeParams, PathParams, Post, Put, Required, Status, Header, ContentType } from "@tsed/common";
 import { NotFound } from "ts-httpexceptions";
 import { Proprietario } from "../../interfaces/Proprietario";
 import { ProprietarioService } from "../../services/proprietario/ProprietarioService";
+import { json2csv } from "json-2-csv-ts"
+import { writeFileSync, readFileSync } from "fs";
 
 @Controller("/proprietario")
 export class ProprietarioCtrl {
@@ -41,9 +43,9 @@ export class ProprietarioCtrl {
   }
 
   @Put("/:id")
-  async update(@PathParams("id") @Required() id:string, @BodyParams() @Required() proprietario: Proprietario): Promise <Proprietario> {
+  async update(@PathParams("id") @Required() id: string, @BodyParams() @Required() proprietario: Proprietario): Promise<Proprietario> {
     const proprietarios = await this.proprietarioService.update(id, proprietario);
-    if(proprietarios) {
+    if (proprietarios) {
       return proprietarios;
     } else {
       throw new NotFound("Erro ao atualizar proprietário");
@@ -54,5 +56,14 @@ export class ProprietarioCtrl {
   @Status(204)
   async remove(@PathParams("id") @Required() id: string) {
     this.proprietarioService.remove(id);
+  }
+
+  @Get("/report/relatorio")
+  @Header("content-disposition", "attachment;fileName=proprietarioReport.csv")
+  @ContentType('application/json')
+  async chart() {
+    let proprietario = await this.proprietarioService.query();
+    writeFileSync(__dirname + '/report.csv', json2csv(proprietario));
+    return readFileSync(__dirname + '/report.csv', 'utf8');
   }
 }

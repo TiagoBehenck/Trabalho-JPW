@@ -1,3 +1,6 @@
 {"nome":"Frida","raca":"Spit Alemão","idade":"1","dataNascimento":"03/03/19","_id":"BQloI0lsKCcPL024"}
-{"nome":"Juno","raca":"Spitz Alemão","idade":"1","dataNascimento":"03/03/19","_id":"NkZr6Ojt6aSsVKUB"}
-{"nome":"Tiago","raca":"Humano","idade":"22","dataNascimento":"09/05/07","_id":"XdZZXRqlORjKJVFA"}
+{"nome":"Tiago","raca":"Spitz","idade":"1","dataNascimento":"03/03/19","_id":"NkZr6Ojt6aSsVKUB"}
+{"nome":"Juno","raca":"Spit Alemão","idade":"1","dataNascimento":"03/03/19","_id":"eQSdZ88RjnX23Rzr"}
+{"nome":"Juno","raca":"Spitz","idade":"1","dataNascimento":"03/03/19","_id":"eQSdZ88RjnX23Rzr"}
+{"$$deleted":true,"_id":"eQSdZ88RjnX23Rzr"}
+{"nome":"Teste","raca":"Spit Alemão","idade":"1","dataNascimento":"03/03/19","_id":"xKhvJFVp9rpeLyLV"}
