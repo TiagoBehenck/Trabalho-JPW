@@ -1,4 +1,4 @@
-# Trabalho da disciplina de Java para Web :school:
+# Trabalho da disciplina de Java para Web :mortar_board:
 
 ## Projeto Final - Parte 1 - Backend :rocket:
 
