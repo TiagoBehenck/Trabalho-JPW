@@ -25,6 +25,18 @@ export class ProprietarioService {
     });
   }
 
+  async findByName(nome: string): Promise<Proprietario> {
+    return new Promise((resolve, reject) => {
+      db.findOne({ nome }, (err, proprietario) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(proprietario);
+        }
+      });
+    });
+  }
+
   async query(): Promise<Proprietario[]> {
     return new Promise((resolve, reject) => {
       db.find({}, (err, proprietario) => {
@@ -36,6 +48,7 @@ export class ProprietarioService {
       });
     });
   }
+
   async create(proprietario: Proprietario): Promise<Proprietario> {
     return new Promise((resolve, reject) => {
       db.insert(proprietario, (err) => {
@@ -59,7 +72,7 @@ export class ProprietarioService {
       });
     });
   }
-
+  
   async remove(id: string): Promise<void> {
     return new Promise((resolve, reject) => {
       db.remove({ _id: id }, {}, err => {

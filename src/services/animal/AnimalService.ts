@@ -11,6 +11,7 @@ export class AnimalService {
   constructor() { }
 
   async findById(id: string): Promise<Animal> {
+    console.log("id:" + id);
     return new Promise((resolve, reject) => {
       db.findOne({ _id: id }, (err, animal) => {
         if (err) {
@@ -21,6 +22,18 @@ export class AnimalService {
       });
     });
   }
+
+  // async findByName(nome: string): Promise<Animal> {
+  //   return new Promise((resolve, reject) => {
+  //     db.findOne({ nome }, (err, animal) => {
+  //       if(err) {
+  //         reject(err);
+  //       } else {
+  //         resolve(animal);
+  //       }
+  //     });
+  //   });
+  // }
 
   async query(): Promise<Animal[]> {
     return new Promise((resolve, reject) => {
@@ -33,7 +46,7 @@ export class AnimalService {
       });
     });
   }
- 
+
   async create(animal: Animal): Promise<Animal> {
     return new Promise((resolve, reject) => {
       db.insert(animal, (err) => {
@@ -47,7 +60,6 @@ export class AnimalService {
   }
 
   async update(id: string, animal: Animal): Promise<Animal> {
-
     return new Promise((resolve, reject) => {
       db.update({ _id: id }, animal, (err) => {
         if (err) {
@@ -58,6 +70,15 @@ export class AnimalService {
       });
     });
   }
+
+  // async removeByName(nome: string): Promise<void> {
+  //   return new Promise((resolve, reject) => {
+  //     db.remove({ nome }, {}, err => {
+  //       if (err)
+  //         reject(err);
+  //     });
+  //   });
+  // }
 
   async remove(id: string): Promise<void> {
     return new Promise((resolve, reject) => {

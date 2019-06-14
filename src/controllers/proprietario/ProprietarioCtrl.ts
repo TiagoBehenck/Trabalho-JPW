@@ -31,6 +31,7 @@ export class ProprietarioCtrl {
       throw new NotFound("Proprietário não encontrado!");
     }
   }
+  
   @Get("/:id")
   async findById(@Required() @PathParams("id") id: string): Promise<Proprietario> {
     const proprietarios = await this.proprietarioService.findById(id);
@@ -41,6 +42,17 @@ export class ProprietarioCtrl {
       throw new NotFound("Nenhum proprietário encontrado!");
     }
   }
+
+  // @Get("/:nome")
+  // async findByName(@Required() @PathParams("nome") nome: string): Promise<Proprietario> {
+  //   const proprietarios = await this.proprietarioService.findByName(nome);
+
+  //   if (proprietarios) {
+  //     return proprietarios;
+  //   } else {
+  //     throw new NotFound("Nenhum proprietário encontrado!");
+  //   }
+  // }
 
   @Put("/:id")
   async update(@PathParams("id") @Required() id: string, @BodyParams() @Required() proprietario: Proprietario): Promise<Proprietario> {

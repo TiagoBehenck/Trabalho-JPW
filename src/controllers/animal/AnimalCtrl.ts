@@ -35,8 +35,19 @@ export class AnimaisCtrl {
     }
   }
 
+  // @Get("/:nome")
+  // async findByName(@Required() @PathParams("nome") nome: string): Promise<Animal> {
+  //   const animal = await this.animalService.findByName(nome);
+
+  //   if (animal) {
+  //     return animal;
+  //   } else {
+  //     throw new NotFound("Nenhum animal encontrado!");
+  //   }
+  // }
+
   @Get("/:id")
-  async findById(@Required() @PathParams("id") id: string): Promise<Animal> {
+  async find(@Required() @PathParams("id") id: string): Promise<Animal> {
     const animais = await this.animalService.findById(id);
 
     if (animais) {
@@ -56,6 +67,12 @@ export class AnimaisCtrl {
       throw new NotFound("Erro ao atualizar animal!");
     }
   }
+
+  // @Delete("/:nome")
+  // async removeByName(@PathParams("nome") @Required() nome: string) {
+  //   this.animalService.removeByName(nome);
+  // }
+
   @Delete("/:id")
   @Status(204)
   async remove(@PathParams("id") @Required() id: string) {

@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const compress = require("compression");
 const methodOverride = require("method-override");
 const rootDir = __dirname;
+const cors = require("cors");
+
 
 @ServerSettings({
   rootDir,
@@ -34,6 +36,7 @@ export class Server extends ServerLoader {
   $onMountingMiddlewares(): void | Promise<any> {
     this
       .use(GlobalAcceptMimesMiddleware)
+      .use(cors())
       .use(cookieParser())
       .use(compress({}))
       .use(methodOverride())
